@@ -1,6 +1,15 @@
 $(function(){
 
-var save_btns= $("saveBtn");
+$("#currentDay").text(moment().format("dddd, MMM Do"))
+
+//adding classes past, present, and future
+//can get time with $(".hour").value
+//forEach function, compare with actual time
+//if actual is later, addClass("past"), removeClass("present future")
+//if equals, addClass("present"), removeClass("past future")
+//if actual is earlier, addClass("future"), removeClass("past present")
+
+
 
 
 $(".saveBtn").on("click", function(){
