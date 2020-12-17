@@ -1,8 +1,16 @@
 $(function(){
 
+var save_btns= $("saveBtn");
 
 
+$(".saveBtn").on("click", function(){
 
+
+    var test = this.previousElementSibling.value;       //stores value in text area upon clicking the save
+    console.log(test);
+
+
+})
 
 
 
