@@ -1,98 +1,74 @@
 $(function () {
 
-    var val_count = 9;
+    var val_count = 9;       //the starting hour on the planner!
+    var hourVal;
+
 
     $("#currentDay").text(moment().format("dddd, MMM Do"))      //current day
 
 
-    // for (var i = 0; i < $(".time-block").length; i++) {
-
-    //     var hour_val = val_count + i;
-
-    //     // console.log(i);
-    //     // console.log(hour_val);
-    //     // var test = parseInt($(".hour")[i]);
-    //     // console.log(test);
-
-    //     //     $(".time-block").attr("value", hour_val);
-    //         console.log($(".time-block").attr("value", hour_val));
-    // }
-
-    // }
-
     var hour_array = $(".time-block").toArray();
-    console.log(hour_array);
-
-    for (var i = 0; i < $(".time-block").length; i++)
-
-    // hour_array.forEach(function (item, index) {
-
-    //     $("this").attr("value", val_count + index)
-
-    // });
-
-    //=====================================================================================================
-    //was getting too complex! MAKE WORK FIRST, THEN CAN GET FANCY!
+    // console.log(hour_array);
 
 
-    //  = moment($(".hour").text(), "hh a");       //make into for loop!
-
-    //     var hours_array= $(".hour").text()
-    //     console.log(hours_array);
-
-    // for (var i=0; i< hours_array.length; i++){      //could turn into for each (ref code_quiz!)
+    //this assigns a value to each time-block div! easier to grab & compare with moment(), 
+    //then add/remove classes based on difference
 
 
+    //need to target each row
+    $(".time-block").each(function (index) {
 
-    //     console.log(hours_array[i]);
+        var id_val = $(this).text();
+        var id_num = parseInt(id_val);
 
-    // moment(hours_array[i], "hh a")
+        if (id_num < 9) {
+            id_num += 12;
+        }
 
-    // var diff = hours_array[i] - moment();
-    //     // console.log(diff);
+        var hour_dif = id_num - moment().format("H");
 
-    // }
+        if (hour_dif < 0) {
+            $(this).addClass("past");
+            $(this).removeClass("present");
+            $(this).removeClass("future");
+        }
+        if (hour_dif = 0) {
+            $(this).addClass("present");
+            $(this).removeClass("past");
+            $(this).removeClass("future");
+        }
+        if (hour_dif > 0) {
+            $(this).addClass("future");
+            $(this).removeClass("present");
+            $(this).removeClass("past");
+        }
 
-    //     console.log(moment());
 
 
-
-    // for (var i = 0; i < hours_array.length; i++){
-
-    //     hours_array[i] = parseInt(hours_array[i]);
-
-    // } 
-
-    // console.log(hours_array);
-
-    // moment()
-
-    // var hours = parseInt($(".hour").text());     //dont think I want; found better with moment
-    // console.log(hours);
+    });
 
 
     //=====================================================================================================
 
 
-    //adding classes past, present, and future
-    //can get time with $(".hour").value
-    //forEach function, compare with actual time
-    //if actual is later, addClass("past"), removeClass("present future")
-    //if equals, addClass("present"), removeClass("past future")
-    //if actual is earlier, addClass("future"), removeClass("past present")
 
-
+    //=====================================================================================================
 
 
     $(".saveBtn").on("click", function () {
 
 
-        var test = this.previousElementSibling.value;       //stores value in text area upon clicking the save
-        console.log(test);
+        //stores value in text area upon clicking the save
+        var todo = this.previousElementSibling.value;
+        console.log(todo);
 
+        var str_todo = JSON.stringify(todo);
+        // storage.setItem(keyName, keyValue);
+        console.log(this);
 
     })
-
+    //^^ need to get time associated too! that way, can, upon retrieval, need to assign to right place!
+    // can get parent of, then do       can add attr "data-val" to it, which can use to grab later! 
 
 
 
