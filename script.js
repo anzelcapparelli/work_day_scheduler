@@ -1,18 +1,18 @@
 $(function () {
 
-    var val_count = 9;       //the starting hour on the planner!
-    var hourVal;
+    var key;
 
+    $("textarea").empty();
+    $("textarea").each(function () {
+        if (localStorage.getItem(key) !== "") {
+            var json_todo = localStorage.getItem((key));
+            var ret_todo = JSON.parse(json_todo);
+            $(this).text(ret_todo);
+        }
+    })
+            //need to fix!  figure out what the "this" from key refers to!
 
     $("#currentDay").text(moment().format("dddd, MMM Do"))      //current day
-
-
-    var hour_array = $(".time-block").toArray();
-    // console.log(hour_array);
-
-
-    //this assigns a value to each time-block div! easier to grab & compare with moment(), 
-    //then add/remove classes based on difference
 
 
     //need to target each row
@@ -60,11 +60,14 @@ $(function () {
 
         //stores value in text area upon clicking the save
         var todo = this.previousElementSibling.value;
-        console.log(todo);
+
+        var key = (parseInt($(this).parent().text()));
 
         var str_todo = JSON.stringify(todo);
+
+        localStorage.setItem(key, str_todo);
         // storage.setItem(keyName, keyValue);
-        console.log(this);
+
 
     })
     //^^ need to get time associated too! that way, can, upon retrieval, need to assign to right place!
