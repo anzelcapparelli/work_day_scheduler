@@ -61,7 +61,7 @@ $(function () {
 
 
         //stores value in text area upon clicking the save
-        var todo = this.previousElementSibling.value;
+        var todo = this.previousElementSibling.value.trim();
 
         var key_sto = (parseInt($(this).parent().text()));
 
