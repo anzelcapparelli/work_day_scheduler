@@ -1,16 +1,18 @@
 $(function () {
 
-    var key;
+
 
     $("textarea").empty();
     $("textarea").each(function () {
-        if (localStorage.getItem(key) !== "") {
-            var json_todo = localStorage.getItem((key));
+        var key_sto = (parseInt($(this).parent().text()))
+        console.log(key_sto);
+        if (localStorage.getItem(key_sto) !== "") {
+            var json_todo = localStorage.getItem((key_sto));
             var ret_todo = JSON.parse(json_todo);
             $(this).text(ret_todo);
-        }
-    })
-            //need to fix!  figure out what the "this" from key refers to!
+            }
+        })
+    //need to fix!  figure out what the "this" from key refers to!
 
     $("#currentDay").text(moment().format("dddd, MMM Do"))      //current day
 
@@ -61,19 +63,16 @@ $(function () {
         //stores value in text area upon clicking the save
         var todo = this.previousElementSibling.value;
 
-        var key = (parseInt($(this).parent().text()));
+        var key_sto = (parseInt($(this).parent().text()));
 
         var str_todo = JSON.stringify(todo);
 
-        localStorage.setItem(key, str_todo);
+        localStorage.setItem(key_sto, str_todo);
         // storage.setItem(keyName, keyValue);
 
 
     })
-    //^^ need to get time associated too! that way, can, upon retrieval, need to assign to right place!
-    // can get parent of, then do       can add attr "data-val" to it, which can use to grab later! 
-
-
+    
 
 });        // makes sure that html fully loads before running javascript
-            // this ensures javascript doesn't try to add/change something to an element that doesn't yet exist
+           // this ensures javascript doesn't try to add/change something to an element that doesn't yet exist

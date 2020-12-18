@@ -1,3 +1,0 @@
-var str = "hour-9"; 
-  var res = str.slice(5);
-  document.getElementById("demo").innerHTML = res;
