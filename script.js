@@ -5,7 +5,6 @@ $(function () {
     $("textarea").empty();
     $("textarea").each(function () {
         var key_sto = (parseInt($(this).parent().text()))
-        console.log(key_sto);
         if (localStorage.getItem(key_sto) !== "") {
             var json_todo = localStorage.getItem((key_sto));
             var ret_todo = JSON.parse(json_todo);
@@ -18,7 +17,7 @@ $(function () {
 
 
     //need to target each row
-    $(".time-block").each(function (index) {
+    $(".time-block").each(function () {
 
         var id_val = $(this).text();
         var id_num = parseInt(id_val);
@@ -48,13 +47,6 @@ $(function () {
 
 
     });
-
-
-    //=====================================================================================================
-
-
-
-    //=====================================================================================================
 
 
     $(".saveBtn").on("click", function () {
